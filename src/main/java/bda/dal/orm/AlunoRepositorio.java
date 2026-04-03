@@ -59,6 +59,14 @@ public class AlunoRepositorio {
 		}
 	}
 	
+	public Aluno buscarAluno(Long id) {
+		Session session = conexao.openSession();
+		
+		return session.get(Aluno.class, id);
+		
+	}
+
+	
 	// criar outras operações
 
 }

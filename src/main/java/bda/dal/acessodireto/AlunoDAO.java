@@ -3,7 +3,10 @@ package bda.dal.acessodireto;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import bda.entidades.Aluno;
 
 //** CAMADA DA DAL - camada de acesso ao dado **
 // Usando DAO
@@ -13,8 +16,8 @@ import java.sql.SQLException;
 public class AlunoDAO {
 
 	// URL: jdbc:mysql://servidor:porta/nome_do_banco
-	private static final String URL = "jdbc:mysql://localhost:3306/aula";
-	private static final String USUARIO = "marcelo";
+	private static final String URL = "jdbc:mysql://localhost:3306/banco_dados_avancado";
+	private static final String USUARIO = "root";
 	private static final String SENHA = "";
 	private static Connection conexao;
 
@@ -48,6 +51,22 @@ public class AlunoDAO {
 		}
 	}
 	
+	public Aluno buscarAluno(Long id) throws SQLException {
+		String sql = "select * from aluno where id = " + id ;
+		ResultSet rs = conexao
+				.createStatement()
+				.executeQuery(sql);
+		while(rs.next()) {		
+			int idade = rs.getInt(1);
+			String nome = rs.getString(2);
+			Aluno aluno = new Aluno();
+			aluno.setId(id);
+			aluno.setNome(nome);
+			aluno.setIdade(idade);
+			return aluno;
+		}
+		return null;
+	}
 	// criar outras operações
 
 }
