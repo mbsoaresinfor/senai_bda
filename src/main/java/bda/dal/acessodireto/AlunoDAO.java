@@ -1,4 +1,4 @@
-package bda.acessodireto.dal.acessodireto;
+package bda.dal.acessodireto;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

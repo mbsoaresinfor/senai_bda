@@ -1,10 +1,10 @@
-package bda.acessodireto;
+package bda.camadaapresentacao;
 
 import java.util.Scanner;
 
-import bda.acessodireto.camadanegocio.AlunoServico;
-import bda.acessodireto.dal.acessodireto.AlunoDAO;
-import bda.acessodireto.dal.orm.AlunoRepositorio;
+import bda.camadanegocio.AlunoServico;
+import bda.dal.acessodireto.AlunoDAO;
+import bda.dal.orm.AlunoRepositorio;
 
 /**
  * Exemplo de uso DAL (Data Access Layer) fazendo uso das estrategias vista em

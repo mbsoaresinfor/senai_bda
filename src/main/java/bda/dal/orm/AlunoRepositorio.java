@@ -1,4 +1,4 @@
-package bda.acessodireto.dal.orm;
+package bda.dal.orm;
 
 
 import org.hibernate.Session;
@@ -6,8 +6,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
-
-import bda.acessodireto.entidades.Aluno;
+import bda.entidades.Aluno;
 
 //** CAMADA DA DAL - camada de acesso ao dado **
 // Usando Repository

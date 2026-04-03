@@ -1,4 +1,4 @@
-package bda.acessodireto.entidades;
+package bda.entidades;
 
 
 
