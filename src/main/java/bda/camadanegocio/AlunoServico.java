@@ -1,8 +1,8 @@
-package bda.acessodireto.camadanegocio;
+package bda.camadanegocio;
 
-import bda.acessodireto.MainCamadaApresentacao;
-import bda.acessodireto.dal.acessodireto.AlunoDAO;
-import bda.acessodireto.dal.orm.AlunoRepositorio;
+import bda.camadaapresentacao.MainCamadaApresentacao;
+import bda.dal.acessodireto.AlunoDAO;
+import bda.dal.orm.AlunoRepositorio;
 
 public class AlunoServico {
 
