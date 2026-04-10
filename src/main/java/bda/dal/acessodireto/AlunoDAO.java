@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import bda.entidades.Aluno;
@@ -70,19 +71,46 @@ public class AlunoDAO {
 	}
 	// criar outras operações
 
-	public boolean existeAlunoMenorIdade() {
-		// TODO Auto-generated method stub
+	public boolean existeAlunoMenorIdade() throws SQLException {
+		String sql = "select count(1) "
+				+ "from aluno where idade < 18 " ;
+		ResultSet rs = conexao
+				.createStatement()
+				.executeQuery(sql);
+		while(rs.next()) {	
+			int total = rs.getInt(1);
+			if(total > 0) {
+				return true;
+			}
+		}
 		return false;
 	}
 
-	public boolean removerAluno(long codigo) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean removerAluno(long codigo) throws SQLException {
+		String sql = "delete from aluno where id = " + codigo;
+		conexao
+		.createStatement().execute(sql);
+		return true;
 	}
 
-	public List<Aluno> buscarAlunoMaiorIdade() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Aluno> buscarAlunoMaiorIdade() throws SQLException {
+		ArrayList<Aluno> lista = new ArrayList<Aluno>();
+		String sql = "select * "
+				+ "from aluno where idade >= 18 " ;
+		ResultSet rs = conexao
+				.createStatement()
+				.executeQuery(sql);
+		while(rs.next()) {	
+			long id = rs.getLong(1);
+			int idade = rs.getInt(3);
+			String nome = rs.getString(2);
+			Aluno aluno = new Aluno();
+			aluno.setId(id);
+			aluno.setNome(nome);
+			aluno.setIdade(idade);
+			lista.add(aluno);
+		}
+		return lista;
 	}
 
 }

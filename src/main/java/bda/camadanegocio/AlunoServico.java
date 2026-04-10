@@ -44,7 +44,7 @@ public class AlunoServico {
 		
 	}
 	
-	public boolean existeAlunoMenorIdade() {
+	public boolean existeAlunoMenorIdade() throws SQLException {
 		if(MainCamadaApresentacao.OPCAO_ESTRATEGIA_DAL == 1) {
 			return alunoDAO.existeAlunoMenorIdade();
 		}else {
@@ -52,7 +52,7 @@ public class AlunoServico {
 		}
 	}
 
-	public boolean deletar(long codigo) {
+	public boolean deletar(long codigo) throws SQLException {
 		if(MainCamadaApresentacao.OPCAO_ESTRATEGIA_DAL == 1) {
 			return alunoDAO.removerAluno(codigo);	
 		}else {
@@ -60,7 +60,7 @@ public class AlunoServico {
 		}
 	}
 	
-	public List<Aluno> buscarAlunoMaiorIdade(){
+	public List<Aluno> buscarAlunoMaiorIdade() throws SQLException{
 		if(MainCamadaApresentacao.OPCAO_ESTRATEGIA_DAL == 1) {
 			return alunoDAO.buscarAlunoMaiorIdade();	
 		}else {

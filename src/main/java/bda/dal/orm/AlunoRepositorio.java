@@ -102,7 +102,7 @@ public class AlunoRepositorio {
 		.createQuery(Aluno.class);
 		Root<Aluno> root = cr.from(Aluno.class);
 		cr.select(root)
-		.where(cb.ge(root.get("idade"),18));
+		.where(cb.le(root.get("idade"),18));
 		TypedQuery<Aluno> query = session
 				.createQuery(cr);
 	    return query.getResultList();
