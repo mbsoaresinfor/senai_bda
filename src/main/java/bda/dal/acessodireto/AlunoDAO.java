@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 import bda.entidades.Aluno;
 
@@ -57,7 +58,7 @@ public class AlunoDAO {
 				.createStatement()
 				.executeQuery(sql);
 		while(rs.next()) {		
-			int idade = rs.getInt(1);
+			int idade = rs.getInt(3);
 			String nome = rs.getString(2);
 			Aluno aluno = new Aluno();
 			aluno.setId(id);
@@ -68,5 +69,20 @@ public class AlunoDAO {
 		return null;
 	}
 	// criar outras operações
+
+	public boolean existeAlunoMenorIdade() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean removerAluno(long codigo) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public List<Aluno> buscarAlunoMaiorIdade() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }

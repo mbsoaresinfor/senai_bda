@@ -1,12 +1,18 @@
 package bda.dal.orm;
 
 
+import java.util.List;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.query.criteria.HibernateCriteriaBuilder;
 
 import bda.entidades.Aluno;
+import jakarta.persistence.TypedQuery;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Root;
 
 //** CAMADA DA DAL - camada de acesso ao dado **
 // Usando Repository
@@ -64,6 +70,42 @@ public class AlunoRepositorio {
 		
 		return session.get(Aluno.class, id);
 		
+	}
+	
+	public boolean removerAluno(Long id) {
+		Session session = conexao.openSession();
+		Aluno aluno = this.buscarAluno(id);
+		if(aluno != null) {
+			session.remove(aluno);
+			return true;			
+		}
+		return false;
+	}
+	
+	public boolean existeAlunoMenorIdade() {
+		Session session = conexao.openSession();
+		HibernateCriteriaBuilder cb = session.getCriteriaBuilder();
+		CriteriaQuery<Aluno> cr = cb
+		.createQuery(Aluno.class);
+		Root<Aluno> root = cr.from(Aluno.class);
+		cr.select(root)
+		.where(cb.ge(root.get("idade"),18));
+		TypedQuery<Aluno> query = session
+				.createQuery(cr);
+	    return query.getResultList().size() > 0;
+	}
+	
+	public List<Aluno> buscarAlunoMaiorIdade() {
+		Session session = conexao.openSession();
+		HibernateCriteriaBuilder cb = session.getCriteriaBuilder();
+		CriteriaQuery<Aluno> cr = cb
+		.createQuery(Aluno.class);
+		Root<Aluno> root = cr.from(Aluno.class);
+		cr.select(root)
+		.where(cb.ge(root.get("idade"),18));
+		TypedQuery<Aluno> query = session
+				.createQuery(cr);
+	    return query.getResultList();
 	}
 
 	

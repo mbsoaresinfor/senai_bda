@@ -1,8 +1,12 @@
 package bda.camadanegocio;
 
+import java.sql.SQLException;
+import java.util.List;
+
 import bda.camadaapresentacao.MainCamadaApresentacao;
 import bda.dal.acessodireto.AlunoDAO;
 import bda.dal.orm.AlunoRepositorio;
+import bda.entidades.Aluno;
 
 public class AlunoServico {
 
@@ -30,5 +34,42 @@ public class AlunoServico {
 		
 		return true;
 	}
+
+	public Aluno buscarAluno(long codigo) throws SQLException {
+		if(MainCamadaApresentacao.OPCAO_ESTRATEGIA_DAL == 1) {
+			return alunoDAO.buscarAluno(codigo);
+		}else {
+			return alunoRepositorio.buscarAluno(codigo);	
+		}
+		
+	}
+	
+	public boolean existeAlunoMenorIdade() {
+		if(MainCamadaApresentacao.OPCAO_ESTRATEGIA_DAL == 1) {
+			return alunoDAO.existeAlunoMenorIdade();
+		}else {
+			return alunoRepositorio.existeAlunoMenorIdade();	
+		}
+	}
+
+	public boolean deletar(long codigo) {
+		if(MainCamadaApresentacao.OPCAO_ESTRATEGIA_DAL == 1) {
+			return alunoDAO.removerAluno(codigo);	
+		}else {
+			return alunoRepositorio.removerAluno(codigo);	
+		}
+	}
+	
+	public List<Aluno> buscarAlunoMaiorIdade(){
+		if(MainCamadaApresentacao.OPCAO_ESTRATEGIA_DAL == 1) {
+			return alunoDAO.buscarAlunoMaiorIdade();	
+		}else {
+			return alunoRepositorio.buscarAlunoMaiorIdade();	
+		}
+	}
+	
+	
+	
+	
 	
 }
