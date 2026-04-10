@@ -1,9 +1,11 @@
 package bda.camadanegocio;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
 import bda.camadaapresentacao.MainCamadaApresentacao;
+import bda.dal.acessodireto.AlunoArquivoRepositorio;
 import bda.dal.acessodireto.AlunoDAO;
 import bda.dal.orm.AlunoRepositorio;
 import bda.entidades.Aluno;
@@ -14,8 +16,9 @@ public class AlunoServico {
 	
 	private AlunoRepositorio alunoRepositorio = new AlunoRepositorio();
 	private AlunoDAO alunoDAO = new AlunoDAO();
-	
-	public boolean salvarAluno(String nome, String idade) {
+	private AlunoArquivoRepositorio arquivoRepositorio = 
+			new AlunoArquivoRepositorio();
+	public boolean salvarAluno(String nome, String idade) throws IOException {
 		if(nome.equals("")) {
 			System.out.println("ERROR: Nome deve ser preenchido");
 			return false;
@@ -28,8 +31,10 @@ public class AlunoServico {
 		
 		if(MainCamadaApresentacao.OPCAO_ESTRATEGIA_DAL == 1) {
 			alunoDAO.salvar(nome, idade);
-		}else {
+		}else if(MainCamadaApresentacao.OPCAO_ESTRATEGIA_DAL == 2) {
 			alunoRepositorio.salvar(nome, idade);	
+		}else if(MainCamadaApresentacao.OPCAO_ESTRATEGIA_DAL == 3) {
+			arquivoRepositorio.salvar(nome, idade);	
 		}
 		
 		return true;

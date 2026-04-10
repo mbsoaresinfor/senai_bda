@@ -1,10 +1,12 @@
 package bda.camadaapresentacao;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Scanner;
 
 import bda.camadanegocio.AlunoServico;
+import bda.dal.acessodireto.AlunoArquivoRepositorio;
 import bda.dal.acessodireto.AlunoDAO;
 import bda.dal.orm.AlunoRepositorio;
 import bda.entidades.Aluno;
@@ -20,16 +22,20 @@ public class MainCamadaApresentacao {
 
 	public static int OPCAO_ESTRATEGIA_DAL;
 
-	public static void main(String[] args) throws SQLException {
+	public static void main(String[] args) throws SQLException, IOException {
 
 		Scanner teclado = new Scanner(System.in);
-		System.out.println("Selecione a estrategia de DAL:\n1. Acesso Direto" + "\n2. ORM  ");
+		System.out.println("Selecione a estrategia de DAL:"
+				+ "\n1. Acesso Direto" + "\n2. ORM \n3. Arquivo ");
 		OPCAO_ESTRATEGIA_DAL = teclado.nextInt();
 		if (OPCAO_ESTRATEGIA_DAL == 1) {
 			AlunoDAO.criarConexao();
 		} else if (OPCAO_ESTRATEGIA_DAL == 2) {
 			AlunoRepositorio.criarConexao();
-		} else {
+		}else if (OPCAO_ESTRATEGIA_DAL == 3) {
+			new AlunoArquivoRepositorio();
+		}
+		else {
 			System.out.println("Erro na escolha da estrategia DAL");
 			return;
 		}
