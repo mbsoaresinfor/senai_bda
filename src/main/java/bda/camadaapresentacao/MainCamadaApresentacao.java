@@ -26,7 +26,7 @@ public class MainCamadaApresentacao {
 
 		Scanner teclado = new Scanner(System.in);
 		System.out.println("Selecione a estrategia de DAL:"
-				+ "\n1. Acesso Direto" + "\n2. ORM \n3. Arquivo ");
+				+ "\n1. Acesso Direto" + "\n2. ORM \n3. Arquivo\n4.NoSql ");
 		OPCAO_ESTRATEGIA_DAL = teclado.nextInt();
 		if (OPCAO_ESTRATEGIA_DAL == 1) {
 			AlunoDAO.criarConexao();
@@ -34,6 +34,28 @@ public class MainCamadaApresentacao {
 			AlunoRepositorio.criarConexao();
 		}else if (OPCAO_ESTRATEGIA_DAL == 3) {
 			new AlunoArquivoRepositorio();
+		}else if (OPCAO_ESTRATEGIA_DAL == 4) {
+			 bda.dal.nosql
+			.AlunoRepositorio.conectar();
+			 bda.dal.nosql
+				.AlunoRepositorio r = new  bda.dal.nosql
+				.AlunoRepositorio();
+			 
+			 Aluno aluno = new Aluno();
+			 aluno.setNome("aluno_sql10");
+			 aluno.setIdade(80);
+			 r.salvar(aluno);
+			 
+			 String jsonAluno ="{ nome: \"marcelo_50\", "
+			 		+ "idade: 3000 }";
+			 r.salvar(jsonAluno);
+			 
+			 for(Aluno a :r.listar2()) {
+				 System.out.println(a.getNome());
+				 System.out.println(a.getIdade());
+			 }
+			 
+			 
 		}
 		else {
 			System.out.println("Erro na escolha da estrategia DAL");
